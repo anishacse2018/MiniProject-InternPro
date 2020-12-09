@@ -1,0 +1,29 @@
+.App{
+  background-color:black;
+  min-height:500px;
+  width: 400px;
+  margin: 40px auto;
+}
+.popo{
+    background-color: black;
+    box-sizing:border-box ;
+    border: blueviolet;
+    width:400px;
+    height:300px;
+    display:"grid";
+   margin-left: 400px;
+    margin-top: 50px;
+}
+input{
+  margin-top: 50px;
+  margin-left: 30px;
+}
+button{
+  margin-top: 30px;
+  font-size: 20px;
+  width:120px;
+  height:40px;
+  margin-left: 140px;
+  background-color: deeppink;
+  color: white;
+}

@@ -1,0 +1,10 @@
+.contain{
+    background-color: black;
+    box-sizing:border-box ;
+    border: blueviolet;
+    width:400px;
+    height:200px;
+    display:"grid";
+   margin-left: 400px;
+    margin-top: 50px;
+}

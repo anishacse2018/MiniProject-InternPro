@@ -1,0 +1,203 @@
+-- phpMyAdmin SQL Dump
+-- version 4.9.0.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: May 23, 2021 at 01:56 PM
+-- Server version: 10.3.16-MariaDB
+-- PHP Version: 7.1.30
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `internprodb`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `appliedusers`
+--
+
+CREATE TABLE `appliedusers` (
+  `user_name` varchar(255) NOT NULL,
+  `job_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `appliedusers`
+--
+
+INSERT INTO `appliedusers` (`user_name`, `job_id`) VALUES
+('high@high', 24);
+
+--
+-- Triggers `appliedusers`
+--
+DELIMITER $$
+CREATE TRIGGER `trigusername` AFTER INSERT ON `appliedusers` FOR EACH ROW INSERT INTO triguser VALUES(NEW.user_name,NEW.job_id)
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `jobtable`
+--
+
+CREATE TABLE `jobtable` (
+  `id` int(11) NOT NULL,
+  `company` varchar(255) DEFAULT NULL,
+  `position` varchar(255) DEFAULT NULL,
+  `location` varchar(255) DEFAULT NULL,
+  `role` varchar(255) DEFAULT NULL,
+  `stipend` int(100) DEFAULT NULL,
+  `skills` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `jobtable`
+--
+
+INSERT INTO `jobtable` (`id`, `company`, `position`, `location`, `role`, `stipend`, `skills`) VALUES
+(24, 'Google', 'Software Developer', 'Hyderabad', 'FRont end developer', 78000, 'Reactjs,PHP,Mysql'),
+(27, 'Adobe', 'Software Developer', 'nagpur', 'Software Developer', 400, 'Problem solving skills'),
+(28, 'Google', 'Counsellor', 'Secunderabad', 'Software Developer', 12300, 'Reactjs,PHP,Mysql');
+
+--
+-- Triggers `jobtable`
+--
+DELIMITER $$
+CREATE TRIGGER `trgAfterInsert` AFTER INSERT ON `jobtable` FOR EACH ROW INSERT INTO trigrec VALUES(NEW.id,NEW.company,NEW.position,NEW.location,NEW.role,NEW.stipend,NEW.skills)
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `registertable`
+--
+
+CREATE TABLE `registertable` (
+  `firstname` varchar(255) NOT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `username` varchar(255) NOT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `logged` varchar(255) DEFAULT NULL,
+  `company` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `registertable`
+--
+
+INSERT INTO `registertable` (`firstname`, `email`, `username`, `password`, `logged`, `company`) VALUES
+('Meghana', '1602-18-733-068@vce.ac.in', 'high@high', 'anisha', 'User', ''),
+('Amma', 'anisha2001@gmail.com', 'Lux', 'anisha', 'User', ''),
+('KOLLIPARA ANISHA', 'shruthiapr3@gmail.com', 'Recruiter', 'anisha', 'Recruiter', 'Adobe'),
+('Anisha', 'anishacse2018@gmail.com', 'Sarcasmqueen', 'anisha', 'Recruiter', 'Google');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `trigrec`
+--
+
+CREATE TABLE `trigrec` (
+  `id` int(11) NOT NULL,
+  `company` varchar(255) DEFAULT NULL,
+  `position` varchar(255) DEFAULT NULL,
+  `location` varchar(255) DEFAULT NULL,
+  `role` varchar(255) DEFAULT NULL,
+  `stipend` int(100) DEFAULT NULL,
+  `skills` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `trigrec`
+--
+
+INSERT INTO `trigrec` (`id`, `company`, `position`, `location`, `role`, `stipend`, `skills`) VALUES
+(23, 'Google', 'SWE', 'Hyderabad', 'Software Developer', 98000, 'Problem solving skills'),
+(24, 'Google', 'Software Developer', 'Hyderabad', 'FRont end developer', 78000, 'Reactjs,PHP,Mysql'),
+(25, 'Adobe', 'SWE', 'Hyderabad', 'FRont end developer', 12300, 'Reactjs,PHP,Mysql'),
+(27, 'Adobe', 'Software Developer', 'nagpur', 'Software Developer', 400, 'Problem solving skills'),
+(28, 'Google', 'Counsellor', 'Secunderabad', 'Software Developer', 12300, 'Reactjs,PHP,Mysql'),
+(29, 'Google', 'bbb', 'Secunderabad', 'FRont end developer', 12300, 'C,C++,JAVA');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `triguser`
+--
+
+CREATE TABLE `triguser` (
+  `username` varchar(255) NOT NULL,
+  `job_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `triguser`
+--
+
+INSERT INTO `triguser` (`username`, `job_id`) VALUES
+('Lux', 23),
+('high@high', 24);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `appliedusers`
+--
+ALTER TABLE `appliedusers`
+  ADD KEY `user_name` (`user_name`),
+  ADD KEY `job_id` (`job_id`);
+
+--
+-- Indexes for table `jobtable`
+--
+ALTER TABLE `jobtable`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `registertable`
+--
+ALTER TABLE `registertable`
+  ADD PRIMARY KEY (`username`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `jobtable`
+--
+ALTER TABLE `jobtable`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `appliedusers`
+--
+ALTER TABLE `appliedusers`
+  ADD CONSTRAINT `appliedusers_ibfk_1` FOREIGN KEY (`user_name`) REFERENCES `registertable` (`username`) ON DELETE CASCADE,
+  ADD CONSTRAINT `appliedusers_ibfk_2` FOREIGN KEY (`job_id`) REFERENCES `jobtable` (`id`) ON DELETE CASCADE;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
